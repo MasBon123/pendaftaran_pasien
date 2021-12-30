@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'H O S P I T A L',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,8 +45,8 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>H O S P I T A L</b>',
+    'logo_img' => 'vendor/adminlte/dist/img/bulat.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -236,32 +236,34 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-        [
-            'text' => 'Ruang',
-            'url' => 'admin/pages',
-            'icon' => 'fas fa-hospital',
-            'label_color' => 'success',
-        ],
+
         [
             'text' => 'Data Keluhan',
-            'url' => 'admin/pages',
+            'url' => 'admin/Keluhan',
             'icon' => 'fas fa-thermometer-half',
             'label_color' => 'success',
         ],
-        ['header' => 'Report'],
+
+        [
+            'text' => 'Ruang',
+            'url' => 'admin/ruang',
+            'icon' => 'fas fa-thermometer-half',
+            'label_color' => 'success',
+        ],
+
         [
             'text' => 'Laporan Pendaftaran',
-            'url' => 'admin/settings',
+            'url' => 'admin/laporan_pendaftaran',
             'icon' => 'fas fa-server',
         ],
         [
             'text' => 'Pendaftaran',
-            'url' => 'admin/settings',
+            'url' => 'admin/pendaftaran',
             'icon' => 'fas fa-server',
         ],
         [
             'text' => 'Jadwal Dokter',
-            'url' => 'admin/settings',
+            'url' => 'admin/jadwal_dokter',
             'icon' => 'fas fa-user-md',
         ],
 

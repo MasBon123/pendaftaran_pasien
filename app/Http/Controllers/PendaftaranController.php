@@ -14,7 +14,8 @@ class PendaftaranController extends Controller
      */
     public function index()
     {
-        //
+        $pendaftaran = pendaftaran::all();
+        return view('pendaftaran.index', compact('pendaftaran'));
     }
 
     /**
@@ -24,7 +25,7 @@ class PendaftaranController extends Controller
      */
     public function create()
     {
-        //
+        return view('pendaftaran.create');
     }
 
     /**
@@ -35,7 +36,30 @@ class PendaftaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama_pasien' => 'required',
+            'keluhan' => 'required',
+            'tanggal_daftar' => 'required',
+            'no_telepon' => 'required',
+            'jk' => 'required',
+            'nama_dokter' => 'required',
+            'jadwal_periksa' => 'required',
+            'ruang' => 'required',
+            'cara_bayar' => 'required',
+        ]);
+
+        $pendaftaran = laporan_pendaftaran::findOrFail($id);
+        $pendaftaran->nama_pasien = $request->nama_pasien;
+        $pendaftaran->keluhan = $request->keluhan;
+        $pendaftaran->tanggal_daftar = $request->tanggal_daftar;
+        $pendaftaran->no_telepon = $request->no_telepon;
+        $pendaftaran->jk = $request->jk;
+        $pendaftaran->nama_dokter = $request->nama_dokter;
+        $pendaftaran->jadwal_periksa = $request->jadwal_periksa;
+        $pendaftaran->ruang = $request->ruang;
+        $pendaftaran->cara_bayar = $request->cara_bayar;
+        $pendaftaran->save();
+        return redirect()->route('pendaftaran.index');
     }
 
     /**
@@ -46,7 +70,8 @@ class PendaftaranController extends Controller
      */
     public function show(pendaftaran $pendaftaran)
     {
-        //
+        $pendaftaran = pendaftaran::findOrFail($id);
+        return view('pendaftaran.show', compact('pendaftaran'));
     }
 
     /**
@@ -57,7 +82,8 @@ class PendaftaranController extends Controller
      */
     public function edit(pendaftaran $pendaftaran)
     {
-        //
+        $pendaftaran = pendaftaran::findOrFail($id);
+        return view('pendaftaran.edit', compact('pendaftaran'));
     }
 
     /**
@@ -67,9 +93,32 @@ class PendaftaranController extends Controller
      * @param  \App\Models\pendaftaran  $pendaftaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pendaftaran $pendaftaran)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nama_pasien' => 'required',
+            'keluhan' => 'required',
+            'tanggal_daftar' => 'required',
+            'no_telepon' => 'required',
+            'jk' => 'required',
+            'nama_dokter' => 'required',
+            'jadwal_periksa' => 'required',
+            'ruang' => 'required',
+            'cara_bayar' => 'required',
+        ]);
+
+        $pendaftaran = laporan_pendaftaran::findOrFail($id);
+        $pendaftaran->nama_pasien = $request->nama_pasien;
+        $pendaftaran->keluhan = $request->keluhan;
+        $pendaftaran->tanggal_daftar = $request->tanggal_daftar;
+        $pendaftaran->no_telepon = $request->no_telepon;
+        $pendaftaran->jk = $request->jk;
+        $pendaftaran->nama_dokter = $request->nama_dokter;
+        $pendaftaran->jadwal_periksa = $request->jadwal_periksa;
+        $pendaftaran->ruang = $request->ruang;
+        $pendaftaran->cara_bayar = $request->cara_bayar;
+        $pendaftaran->save();
+        return redirect()->route('laporan_pendaftaran.index');
     }
 
     /**
@@ -80,6 +129,8 @@ class PendaftaranController extends Controller
      */
     public function destroy(pendaftaran $pendaftaran)
     {
-        //
+        $pendaftaran =pendaftaran::findOrFail($id);
+        $pendaftaran->delete();
+        return redirect()->route('pendaftaran.index');
     }
 }

@@ -14,7 +14,8 @@ class LaporanPendaftaranController extends Controller
      */
     public function index()
     {
-        //
+        $laporan_pendaftaran = laporan_pendaftaran::all();
+        return view('laporan_pendaftaran.index', compact('laporan_pendaftaran'));
     }
 
     /**
@@ -24,7 +25,7 @@ class LaporanPendaftaranController extends Controller
      */
     public function create()
     {
-        //
+        return view('laporan_pendaftaran.create');
     }
 
     /**
@@ -35,7 +36,31 @@ class LaporanPendaftaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama_pasien' => 'required',
+            'keluhan' => 'required',
+            'tanggal_daftar' => 'required',
+            'no_telepon' => 'required',
+            'jk' => 'required',
+            'nama_dokter' => 'required',
+            'jadwal_periksa' => 'required',
+            'ruang' => 'required',
+            'cara_bayar' => 'required',
+        ]);
+
+        $laporan_pendaftaran = new laporan_pendaftaran;
+        $laporan_pendaftaran->nama_pasien = $request->nama_pasien;
+        $laporan_pendaftaran->keluhan = $request->keluhan;
+        $laporan_pendaftaran->tanggal_daftar = $request->tanggal_daftar;
+        $laporan_pendaftaran->no_telepon = $request->no_telepon;
+        $laporan_pendaftaran->jk = $request->jk;
+        $laporan_pendaftaran->nama_dokter = $request->nama_dokter;
+        $laporan_pendaftaran->jadwal_periksa = $request->jadwal_periksa;
+        $laporan_pendaftaran->ruang = $request->ruang;
+        $laporan_pendaftaran->cara_bayar = $request->cara_bayar;
+
+        $laporan_pendaftaran->save();
+        return redirect()->route('laporan_pendaftaran.index');
     }
 
     /**
@@ -46,7 +71,8 @@ class LaporanPendaftaranController extends Controller
      */
     public function show(laporan_pendaftaran $laporan_pendaftaran)
     {
-        //
+        $laporan_pendaftaran = laporan_pendaftaran::findOrFail($id);
+        return view('laporan_pendaftaran.show', compact('laporan_pendaftaran'));
     }
 
     /**
@@ -57,7 +83,8 @@ class LaporanPendaftaranController extends Controller
      */
     public function edit(laporan_pendaftaran $laporan_pendaftaran)
     {
-        //
+        $laporan_pendaftaran = laporan_pendaftaran::findOrFail($id);
+        return view('laporan_pendaftaran.edit', compact('laporan_pendaftaran'));
     }
 
     /**
@@ -67,9 +94,32 @@ class LaporanPendaftaranController extends Controller
      * @param  \App\Models\laporan_pendaftaran  $laporan_pendaftaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, laporan_pendaftaran $laporan_pendaftaran)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nama_pasien' => 'required',
+            'keluhan' => 'required',
+            'tanggal_daftar' => 'required',
+            'no_telepon' => 'required',
+            'jk' => 'required',
+            'nama_dokter' => 'required',
+            'jadwal_periksa' => 'required',
+            'ruang' => 'required',
+            'cara_bayar' => 'required',
+        ]);
+
+        $laporan_pendaftaran = laporan_pendaftaran::findOrFail($id);
+        $laporan_pendaftaran->nama_pasien = $request->nama_pasien;
+        $laporan_pendaftaran->keluhan = $request->keluhan;
+        $laporan_pendaftaran->tanggal_daftar = $request->tanggal_daftar;
+        $laporan_pendaftaran->no_telepon = $request->no_telepon;
+        $laporan_pendaftaran->jk = $request->jk;
+        $laporan_pendaftaran->nama_dokter = $request->nama_dokter;
+        $laporan_pendaftaran->jadwal_periksa = $request->jadwal_periksa;
+        $laporan_pendaftaran->ruang = $request->ruang;
+        $laporan_pendaftaran->cara_bayar = $request->cara_bayar;
+        $laporan_pendaftaran->save();
+        return redirect()->route('laporan_pendaftaran.index');
     }
 
     /**
@@ -80,6 +130,8 @@ class LaporanPendaftaranController extends Controller
      */
     public function destroy(laporan_pendaftaran $laporan_pendaftaran)
     {
-        //
+        $laporan_pendaftaran =laporan_pendaftaran::findOrFail($id);
+        $laporan_pendaftaran->delete();
+        return redirect()->route('laporan_pendaftaran.index');
     }
 }

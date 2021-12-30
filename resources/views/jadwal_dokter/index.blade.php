@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-12">
-                <h1 class="m-0">Pendaftaran</h1>
+                <h1 class="m-0">Jadwal Dokter</h1>
             </div>
         </div>
     </div>
@@ -17,8 +17,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Pendaftaran
-                    <a href="{{route('pendaftaran.create')}}" class="btn btn-sm btn-outline-primary float-right">Tambah Kategori</a>
+                    KELUHAN
+                    <a href="{{route('jadwal_dokter.create')}}" class="btn btn-sm btn-outline-primary float-right">Tambah Kategori</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -33,17 +33,17 @@
                             </thead>
                             <tbody>
                                     @php $no=1; @endphp
-                                    @foreach ($pendaftaran as $data)
+                                    @foreach ($jadwal_dokter as $data)
                                     <tr>
                                         <td>{{$no++}}</td>
                                         <td>{{$data->nama_kategori}}</td>
                                         <td>{{$data->keterangan}}</td>
                                         <td>
-                                            <form action="{{route('pendaftaran .destroy',$data->id)}}" method="post">
+                                            <form action="{{route('jadwal_dokter .destroy',$data->id)}}" method="post">
                                                 @method('delete')
                                                 @csrf
-                                                <a href="{{route('pendaftaran .edit',$data->id)}}" class="btn btn-outline-info">Edit</a>
-                                                <a href="{{route('pendaftaran .show',$data->id)}}" class="btn btn-outline-warning">Show</a>
+                                                <a href="{{route('jadwal_dokter .edit',$data->id)}}" class="btn btn-outline-info">Edit</a>
+                                                <a href="{{route('jadwal_dokter .show',$data->id)}}" class="btn btn-outline-warning">Show</a>
                                                 <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Apakah anda yakin menghapusnya')">Hapus</button>
                                                 </form>
                                         </td>

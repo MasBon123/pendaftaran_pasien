@@ -14,7 +14,9 @@ class RuangController extends Controller
      */
     public function index()
     {
-        //
+        $ruang = ruang::all();
+        return view('ruang.index', compact('ruang'));
+
     }
 
     /**
@@ -24,7 +26,7 @@ class RuangController extends Controller
      */
     public function create()
     {
-        //
+        return view('ruang.create');
     }
 
     /**
@@ -35,7 +37,16 @@ class RuangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required',
+            'keterangan' => 'required',
+        ]);
+
+        $ruang = new ruang;
+        $ruang->nama = $request->nama;
+        $ruang->keterangan = $request->keterangan;
+        $ruang->save();
+        return redirect()->route('ruang.index');
     }
 
     /**
@@ -44,9 +55,10 @@ class RuangController extends Controller
      * @param  \App\Models\ruang  $ruang
      * @return \Illuminate\Http\Response
      */
-    public function show(ruang $ruang)
+    public function show($id)
     {
-        //
+        $ruang = ruang::findOrFail($id);
+        return view('ruang.show', compact('ruang'));
     }
 
     /**
@@ -57,7 +69,8 @@ class RuangController extends Controller
      */
     public function edit(ruang $ruang)
     {
-        //
+        $ruang = ruang::findOrFail($id);
+        return view('ruang.edit', compact('ruang'));
     }
 
     /**
@@ -67,9 +80,18 @@ class RuangController extends Controller
      * @param  \App\Models\ruang  $ruang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ruang $ruang)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required',
+            'keterangan' => 'required',
+        ]);
+
+        $ruang = keluhan::findOrFail($id);
+        $ruang->nama = $request->nama;
+        $ruang->keterangan = $request->keterangan;
+        $ruang->save();
+        return redirect()->route('ruang.index');
     }
 
     /**
@@ -80,6 +102,8 @@ class RuangController extends Controller
      */
     public function destroy(ruang $ruang)
     {
-        //
+        $ruang =ruang::findOrFail($id);
+        $ruang->delete();
+        return redirect()->route('ruaang.index');
     }
 }

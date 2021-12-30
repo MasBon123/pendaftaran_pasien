@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LaporanPendaftaranController;
+use App\Http\Controllers\JadwalDokterController;
+use App\Http\Controllers\KeluhanController;
+use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\RuangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,9 +49,7 @@ Route::group(['prefix' => 'member', 'middleware' => ['auth', 'role:member']], fu
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::get('jadwal', function () {
-        return view('jadwal.index');
-    })->middleware(['role:admin']);
+
 
     Route::get('keluhan', function () {
         return view('keluhan.index');
@@ -56,19 +59,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         return view('laporan.index');
     })->middleware(['role:admin']);
 
-    Route::get('pendaftaran', function () {
-        return view('pendaftaran.index');
-    })->middleware(['role:admin']);
+     Route::get('pendaftaran', function () {
+         return view('pendaftaran.index');
+     })->middleware(['role:admin']);
 
     Route::get('ruang', function () {
         return view('ruang.index');
     })->middleware(['role:admin']);
-
+    Route::resource('laporan_pendaftaran', LaporanPendaftaranController::class);
+    Route::resource('jadwal_dokter', JadwalDokterController::class);
+    Route::resource('Keluhan', KeluhanController::class);
+    Route::resource('pendaftaran', PendaftaranController::class);
+    Route::resource('ruang', RuangController::class);
 });
 
 Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
-    Route::get('jadwal', function () {
-        return view('jadwal.index');
+    Route::get('jadwal_dokter', function () {
+        return view('jadwal_dokter.index');
     })->middleware(['role:member|admin']);
 
     Route::get('keluhan', function () {
@@ -82,6 +89,10 @@ Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
     Route::get('ruang', function () {
         return view('ruang.index');
     })->middleware(['role:member|admin']);
+
+
+
+
 
 });
 

@@ -26,9 +26,6 @@ class CreatePendaftaransTable extends Migration
             $table->string('jk');
             $table->date('jadwal_periksa');
             $table->bigInteger('ruang')->unsigned();
-            $table->foreign('ruang')->references('id')
-                ->on('ruangs')->onUpdate('cascade')
-                ->onDelete('cascade');
             $table->string('cara_bayar');
             $table->timestamps();
         });

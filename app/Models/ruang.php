@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ruang extends Model
 {
     use HasFactory;
+
+
 }
